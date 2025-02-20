@@ -1,0 +1,33 @@
+function onEdit(e) {
+  var sheet = e.source.getActiveSheet();
+  var range = e.range;
+  
+  // Define the column number to watch (E = column 5)
+  var watchColumn = 5;
+  
+  if (range.getColumn() === watchColumn) {
+    var row = range.getRow();
+    var rowData = sheet.getRange(row, 1, 1, sheet.getLastColumn()).getValues()[0];
+    
+    var payload = {
+      value: rowData[watchColumn - 1], // Market, or whatever is in column E
+      rowNumber: row,
+      rowData: {
+        name: rowData[0],   // Column A
+        address: rowData[2], // Column C
+        unit: rowData[3],   // Column D
+        status: rowData[4], // Column E (this should be "Market")
+        agent: rowData[6],  // Column G
+        date: rowData[7],   // Column H
+      }
+    };
+
+    var options = {
+      method: "post",
+      contentType: "application/json",
+      payload: JSON.stringify(payload),
+    };
+
+    UrlFetchApp.fetch("https://hook.us2.make.com/yydejwf765biatgebe2u5mktojgraxp3", options);
+  }
+}
