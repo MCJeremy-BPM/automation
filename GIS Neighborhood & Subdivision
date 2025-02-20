@@ -1,5 +1,5 @@
 // **1. Configuration (REPLACE THESE WITH YOUR ACTUAL VALUES)**
-const GOOGLE_MAPS_API_KEY = 'AIzaSyB5tdjZrvdwxoGs0OhoqCF_4C53FqFsQEM';
+const GOOGLE_MAPS_API_KEY = '';
 const ADDRESS_FIELD_NAME = 'Address';
 const NEIGHBORHOOD_FIELD_NAME = 'Neighborhood';
 const BASE_NAME = 'BPM CRM';
