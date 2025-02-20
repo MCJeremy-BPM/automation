@@ -1,0 +1,1704 @@
+{
+    "name": "Integration Google Sheets",
+    "flow": [
+        {
+            "id": 1,
+            "module": "google-sheets:watchUpdatedCells",
+            "version": 2,
+            "parameters": {
+                "__IMTHOOK__": 373025
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTHOOK__": {
+                            "data": {
+                                "editable": "false"
+                            },
+                            "label": "Make Integration"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook:google-sheets2",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "spreadsheetId",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "spreadsheetName",
+                        "type": "text",
+                        "label": "Spreadsheet name"
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "number",
+                        "label": "Sheet ID"
+                    },
+                    {
+                        "name": "sheetName",
+                        "type": "text",
+                        "label": "Sheet name"
+                    },
+                    {
+                        "name": "rangeA1Notation",
+                        "type": "text",
+                        "label": "Range A1 notation"
+                    },
+                    {
+                        "name": "range",
+                        "spec": [
+                            {
+                                "name": "rowStart",
+                                "type": "number",
+                                "label": "Row start"
+                            },
+                            {
+                                "name": "rowEnd",
+                                "type": "number",
+                                "label": "Row end"
+                            },
+                            {
+                                "name": "columnStart",
+                                "type": "number",
+                                "label": "Column start"
+                            },
+                            {
+                                "name": "columnEnd",
+                                "type": "number",
+                                "label": "Column end"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Range"
+                    },
+                    {
+                        "name": "value",
+                        "type": "text",
+                        "label": "Value"
+                    },
+                    {
+                        "name": "oldValue",
+                        "type": "text",
+                        "label": "Old value"
+                    },
+                    {
+                        "name": "user",
+                        "spec": [
+                            {
+                                "name": "nickname",
+                                "type": "text",
+                                "label": "Nickname"
+                            },
+                            {
+                                "name": "email",
+                                "type": "text",
+                                "label": "Email"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "User"
+                    },
+                    {
+                        "name": "rowValues",
+                        "spec": [
+                            {
+                                "name": "0",
+                                "type": "text",
+                                "label": "A"
+                            },
+                            {
+                                "name": "1",
+                                "type": "text",
+                                "label": "B"
+                            },
+                            {
+                                "name": "2",
+                                "type": "text",
+                                "label": "C"
+                            },
+                            {
+                                "name": "3",
+                                "type": "text",
+                                "label": "D"
+                            },
+                            {
+                                "name": "4",
+                                "type": "text",
+                                "label": "E"
+                            },
+                            {
+                                "name": "5",
+                                "type": "text",
+                                "label": "F"
+                            },
+                            {
+                                "name": "6",
+                                "type": "text",
+                                "label": "G"
+                            },
+                            {
+                                "name": "7",
+                                "type": "text",
+                                "label": "H"
+                            },
+                            {
+                                "name": "8",
+                                "type": "text",
+                                "label": "I"
+                            },
+                            {
+                                "name": "9",
+                                "type": "text",
+                                "label": "J"
+                            },
+                            {
+                                "name": "10",
+                                "type": "text",
+                                "label": "K"
+                            },
+                            {
+                                "name": "11",
+                                "type": "text",
+                                "label": "L"
+                            },
+                            {
+                                "name": "12",
+                                "type": "text",
+                                "label": "M"
+                            },
+                            {
+                                "name": "13",
+                                "type": "text",
+                                "label": "N"
+                            },
+                            {
+                                "name": "14",
+                                "type": "text",
+                                "label": "O"
+                            },
+                            {
+                                "name": "15",
+                                "type": "text",
+                                "label": "P"
+                            },
+                            {
+                                "name": "16",
+                                "type": "text",
+                                "label": "Q"
+                            },
+                            {
+                                "name": "17",
+                                "type": "text",
+                                "label": "R"
+                            },
+                            {
+                                "name": "18",
+                                "type": "text",
+                                "label": "S"
+                            },
+                            {
+                                "name": "19",
+                                "type": "text",
+                                "label": "T"
+                            },
+                            {
+                                "name": "20",
+                                "type": "text",
+                                "label": "U"
+                            },
+                            {
+                                "name": "21",
+                                "type": "text",
+                                "label": "V"
+                            },
+                            {
+                                "name": "22",
+                                "type": "text",
+                                "label": "W"
+                            },
+                            {
+                                "name": "23",
+                                "type": "text",
+                                "label": "X"
+                            },
+                            {
+                                "name": "24",
+                                "type": "text",
+                                "label": "Y"
+                            },
+                            {
+                                "name": "25",
+                                "type": "text",
+                                "label": "Z"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Row values"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 1528133
+            },
+            "filter": {
+                "name": "",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{1.value}}",
+                            "b": "Market",
+                            "o": "text:equal"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "from": "drive",
+                "filter": [
+                    [
+                        {
+                            "a": "E",
+                            "b": "Market",
+                            "o": "text:equal"
+                        },
+                        {
+                            "a": "O",
+                            "b": "{{1.rowNumber}}",
+                            "o": "text:equal"
+                        }
+                    ]
+                ],
+                "sheetId": "Master",
+                "sortOrder": "asc",
+                "spreadsheetId": "1rTh1VjB5l6Cfb9WeBRxnsvnNFzw5QCsMEoPx7Nviddc",
+                "tableFirstRow": "A1:CZ1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "orderBy": {
+                            "mode": "chose"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Master"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Market Rate Renewals 25-26"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-CZ"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (marketing@bradenproperty.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "label": "Total number of bundles",
+                        "type": "uinteger"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "label": "Bundle order position",
+                        "type": "uinteger"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Past PM (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Current PM (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "Unit Name (C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "Renewal Rate (D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "Renewal Status (E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "Notes (F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "Tenant Name (G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "Lease Expires  (H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "Current Rent (I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "Market Range (J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "Marketing Sheet (K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "Max Price (L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "Min Price (M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "Status (Owner Contact)  (N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "Row ID (O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "Owner Adjustment Notes (P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "Last Follow Up (Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "PM Comments (R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "Move In (S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "Owner(s) (T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "Market Rate (U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "Owner Email (V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "Neighborhood (W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "Column 1 (X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "Unit Address (Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "Renew % (Z)"
+                    },
+                    {
+                        "name": "26",
+                        "type": "text",
+                        "label": "Market % (Set) (AA)"
+                    },
+                    {
+                        "name": "27",
+                        "type": "text",
+                        "label": "Top Range % (AB)"
+                    },
+                    {
+                        "name": "28",
+                        "type": "text",
+                        "label": "Bottom Range % (AC)"
+                    },
+                    {
+                        "name": "29",
+                        "type": "text",
+                        "label": "Market Rate (Raw) (AD)"
+                    },
+                    {
+                        "name": "30",
+                        "type": "text",
+                        "label": "Renewal Rate (Raw) (AE)"
+                    },
+                    {
+                        "name": "31",
+                        "type": "text",
+                        "label": "Top Range (Raw) (AF)"
+                    },
+                    {
+                        "name": "32",
+                        "type": "text",
+                        "label": "Top Range (AG)"
+                    },
+                    {
+                        "name": "33",
+                        "type": "text",
+                        "label": "Bottom Range (Raw) (AH)"
+                    },
+                    {
+                        "name": "34",
+                        "type": "text",
+                        "label": "Bottom Range (AI)"
+                    },
+                    {
+                        "name": "35",
+                        "type": "text",
+                        "label": "Spread (AJ)"
+                    },
+                    {
+                        "name": "36",
+                        "type": "text",
+                        "label": "Sqft  (AK)"
+                    },
+                    {
+                        "name": "37",
+                        "type": "text",
+                        "label": "Market Rent  (AL)"
+                    },
+                    {
+                        "name": "38",
+                        "type": "text",
+                        "label": "Tags (AM)"
+                    },
+                    {
+                        "name": "39",
+                        "type": "text",
+                        "label": "Property Name (AN)"
+                    },
+                    {
+                        "name": "40",
+                        "type": "text",
+                        "label": "Max Price 1 (AO)"
+                    },
+                    {
+                        "name": "41",
+                        "type": "text",
+                        "label": "(AP)"
+                    },
+                    {
+                        "name": "42",
+                        "type": "text",
+                        "label": "(AQ)"
+                    },
+                    {
+                        "name": "43",
+                        "type": "text",
+                        "label": "(AR)"
+                    },
+                    {
+                        "name": "44",
+                        "type": "text",
+                        "label": "df (AS)"
+                    },
+                    {
+                        "name": "45",
+                        "type": "text",
+                        "label": "(AT)"
+                    },
+                    {
+                        "name": "46",
+                        "type": "text",
+                        "label": "(AU)"
+                    },
+                    {
+                        "name": "47",
+                        "type": "text",
+                        "label": "(AV)"
+                    },
+                    {
+                        "name": "48",
+                        "type": "text",
+                        "label": "(AW)"
+                    },
+                    {
+                        "name": "49",
+                        "type": "text",
+                        "label": "(AX)"
+                    },
+                    {
+                        "name": "50",
+                        "type": "text",
+                        "label": "(AY)"
+                    },
+                    {
+                        "name": "51",
+                        "type": "text",
+                        "label": "(AZ)"
+                    },
+                    {
+                        "name": "52",
+                        "type": "text",
+                        "label": "(BA)"
+                    },
+                    {
+                        "name": "53",
+                        "type": "text",
+                        "label": "(BB)"
+                    },
+                    {
+                        "name": "54",
+                        "type": "text",
+                        "label": "(BC)"
+                    },
+                    {
+                        "name": "55",
+                        "type": "text",
+                        "label": "(BD)"
+                    },
+                    {
+                        "name": "56",
+                        "type": "text",
+                        "label": "(BE)"
+                    },
+                    {
+                        "name": "57",
+                        "type": "text",
+                        "label": "(BF)"
+                    },
+                    {
+                        "name": "58",
+                        "type": "text",
+                        "label": "(BG)"
+                    },
+                    {
+                        "name": "59",
+                        "type": "text",
+                        "label": "(BH)"
+                    },
+                    {
+                        "name": "60",
+                        "type": "text",
+                        "label": "(BI)"
+                    },
+                    {
+                        "name": "61",
+                        "type": "text",
+                        "label": "(BJ)"
+                    },
+                    {
+                        "name": "62",
+                        "type": "text",
+                        "label": "(BK)"
+                    },
+                    {
+                        "name": "63",
+                        "type": "text",
+                        "label": "(BL)"
+                    },
+                    {
+                        "name": "64",
+                        "type": "text",
+                        "label": "(BM)"
+                    },
+                    {
+                        "name": "65",
+                        "type": "text",
+                        "label": "(BN)"
+                    },
+                    {
+                        "name": "66",
+                        "type": "text",
+                        "label": "(BO)"
+                    },
+                    {
+                        "name": "67",
+                        "type": "text",
+                        "label": "(BP)"
+                    },
+                    {
+                        "name": "68",
+                        "type": "text",
+                        "label": "(BQ)"
+                    },
+                    {
+                        "name": "69",
+                        "type": "text",
+                        "label": "(BR)"
+                    },
+                    {
+                        "name": "70",
+                        "type": "text",
+                        "label": "(BS)"
+                    },
+                    {
+                        "name": "71",
+                        "type": "text",
+                        "label": "(BT)"
+                    },
+                    {
+                        "name": "72",
+                        "type": "text",
+                        "label": "(BU)"
+                    },
+                    {
+                        "name": "73",
+                        "type": "text",
+                        "label": "(BV)"
+                    },
+                    {
+                        "name": "74",
+                        "type": "text",
+                        "label": "(BW)"
+                    },
+                    {
+                        "name": "75",
+                        "type": "text",
+                        "label": "(BX)"
+                    },
+                    {
+                        "name": "76",
+                        "type": "text",
+                        "label": "(BY)"
+                    },
+                    {
+                        "name": "77",
+                        "type": "text",
+                        "label": "(BZ)"
+                    },
+                    {
+                        "name": "78",
+                        "type": "text",
+                        "label": "(CA)"
+                    },
+                    {
+                        "name": "79",
+                        "type": "text",
+                        "label": "(CB)"
+                    },
+                    {
+                        "name": "80",
+                        "type": "text",
+                        "label": "(CC)"
+                    },
+                    {
+                        "name": "81",
+                        "type": "text",
+                        "label": "(CD)"
+                    },
+                    {
+                        "name": "82",
+                        "type": "text",
+                        "label": "(CE)"
+                    },
+                    {
+                        "name": "83",
+                        "type": "text",
+                        "label": "(CF)"
+                    },
+                    {
+                        "name": "84",
+                        "type": "text",
+                        "label": "(CG)"
+                    },
+                    {
+                        "name": "85",
+                        "type": "text",
+                        "label": "(CH)"
+                    },
+                    {
+                        "name": "86",
+                        "type": "text",
+                        "label": "(CI)"
+                    },
+                    {
+                        "name": "87",
+                        "type": "text",
+                        "label": "(CJ)"
+                    },
+                    {
+                        "name": "88",
+                        "type": "text",
+                        "label": "(CK)"
+                    },
+                    {
+                        "name": "89",
+                        "type": "text",
+                        "label": "(CL)"
+                    },
+                    {
+                        "name": "90",
+                        "type": "text",
+                        "label": "(CM)"
+                    },
+                    {
+                        "name": "91",
+                        "type": "text",
+                        "label": "(CN)"
+                    },
+                    {
+                        "name": "92",
+                        "type": "text",
+                        "label": "(CO)"
+                    },
+                    {
+                        "name": "93",
+                        "type": "text",
+                        "label": "(CP)"
+                    },
+                    {
+                        "name": "94",
+                        "type": "text",
+                        "label": "(CQ)"
+                    },
+                    {
+                        "name": "95",
+                        "type": "text",
+                        "label": "(CR)"
+                    },
+                    {
+                        "name": "96",
+                        "type": "text",
+                        "label": "(CS)"
+                    },
+                    {
+                        "name": "97",
+                        "type": "text",
+                        "label": "(CT)"
+                    },
+                    {
+                        "name": "98",
+                        "type": "text",
+                        "label": "(CU)"
+                    },
+                    {
+                        "name": "99",
+                        "type": "text",
+                        "label": "(CV)"
+                    },
+                    {
+                        "name": "100",
+                        "type": "text",
+                        "label": "(CW)"
+                    },
+                    {
+                        "name": "101",
+                        "type": "text",
+                        "label": "(CX)"
+                    },
+                    {
+                        "name": "102",
+                        "type": "text",
+                        "label": "(CY)"
+                    },
+                    {
+                        "name": "103",
+                        "type": "text",
+                        "label": "(CZ)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "airtable:ActionCreateRecord",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 1528254
+            },
+            "mapper": {
+                "base": "appMVIIktha5wbwUb",
+                "table": "tblfY4GrbSA2zp2N3",
+                "record": {
+                    "fld3a02CroWq43UQ5": "{{2.`11`}}",
+                    "fld400rRq6ca3Cg92": "{{2.`2`}}",
+                    "fldLfmLSzxzVMS6ht": "{{2.`7`}}",
+                    "fldYz7grMKRPmK8yT": "{{2.`12`}}",
+                    "fldeHLhyzW5yIlFuN": "{{2.`1`}}"
+                },
+                "typecast": false,
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "label": "BPM CRM"
+                        },
+                        "table": {
+                            "label": "Activation & Pricing Workflow",
+                            "nested": [
+                                {
+                                    "name": "record",
+                                    "spec": [
+                                        {
+                                            "name": "fld400rRq6ca3Cg92",
+                                            "type": "text",
+                                            "label": "Unit Name"
+                                        },
+                                        {
+                                            "name": "fldopI71CcmKG8FgJ",
+                                            "time": false,
+                                            "type": "date",
+                                            "label": "Activate By"
+                                        },
+                                        {
+                                            "name": "fld3a02CroWq43UQ5",
+                                            "type": "number",
+                                            "label": "Max Rate"
+                                        },
+                                        {
+                                            "name": "fldYz7grMKRPmK8yT",
+                                            "type": "number",
+                                            "label": "Min Rate"
+                                        },
+                                        {
+                                            "name": "fldlYU2nDvqXbDYKE",
+                                            "type": "boolean",
+                                            "label": "Description Ready"
+                                        },
+                                        {
+                                            "name": "fldCqtkGDLc9UL5sY",
+                                            "spec": {
+                                                "mode": "edit",
+                                                "type": "select",
+                                                "label": "Value",
+                                                "dynamic": true,
+                                                "options": [
+                                                    {
+                                                        "label": "Ready for Activation",
+                                                        "value": "Ready for Activation"
+                                                    },
+                                                    {
+                                                        "label": "Missing Photos",
+                                                        "value": "Missing Photos"
+                                                    },
+                                                    {
+                                                        "label": "Missing Tour",
+                                                        "value": "Missing Tour"
+                                                    },
+                                                    {
+                                                        "label": "Review",
+                                                        "value": "Review"
+                                                    },
+                                                    {
+                                                        "label": "Photos Are of Similar Unit",
+                                                        "value": "Photos Are of Similar Unit"
+                                                    }
+                                                ],
+                                                "validate": false
+                                            },
+                                            "type": "array",
+                                            "label": "Media Status"
+                                        },
+                                        {
+                                            "name": "fldQBEG0ELsdEyrB0",
+                                            "spec": {
+                                                "mode": "edit",
+                                                "type": "select",
+                                                "label": "Value",
+                                                "dynamic": true,
+                                                "options": [
+                                                    {
+                                                        "label": "Add 3D Tour",
+                                                        "value": "Add 3D Tour"
+                                                    },
+                                                    {
+                                                        "label": "Add Drone",
+                                                        "value": "Add Drone"
+                                                    },
+                                                    {
+                                                        "label": "Needs Photos to Market",
+                                                        "value": "Needs Photos to Market"
+                                                    },
+                                                    {
+                                                        "label": "None",
+                                                        "value": "None"
+                                                    },
+                                                    {
+                                                        "label": "Photos Next Turn",
+                                                        "value": "Photos Next Turn"
+                                                    },
+                                                    {
+                                                        "label": "Photos to Edit on Drive",
+                                                        "value": "Photos to Edit on Drive"
+                                                    }
+                                                ],
+                                                "validate": false
+                                            },
+                                            "type": "array",
+                                            "label": "Media Action"
+                                        },
+                                        {
+                                            "name": "fldegIzLAmXZwwxHc",
+                                            "type": "boolean",
+                                            "label": "Ready for Market"
+                                        },
+                                        {
+                                            "mode": "edit",
+                                            "name": "fldn07XzgdD4F1fYJ",
+                                            "type": "select",
+                                            "label": "Activation Status",
+                                            "dynamic": true,
+                                            "options": [
+                                                {
+                                                    "label": "Not Activated",
+                                                    "value": "Not Activated"
+                                                },
+                                                {
+                                                    "label": "Activated on all Platforms",
+                                                    "value": "Activated on all Platforms"
+                                                },
+                                                {
+                                                    "label": "Activated to BPM Site Only",
+                                                    "value": "Activated to BPM Site Only"
+                                                },
+                                                {
+                                                    "label": "Leased & Deactivated",
+                                                    "value": "Leased & Deactivated"
+                                                }
+                                            ],
+                                            "validate": false
+                                        },
+                                        {
+                                            "name": "fldLfmLSzxzVMS6ht",
+                                            "time": false,
+                                            "type": "date",
+                                            "label": "Lease Expires"
+                                        },
+                                        {
+                                            "name": "fldvAtOMpBAJhhiG5",
+                                            "time": false,
+                                            "type": "date",
+                                            "label": "Availability Date"
+                                        },
+                                        {
+                                            "name": "fldd5h4V6qakWWHVv",
+                                            "time": false,
+                                            "type": "date",
+                                            "label": "Date Activated"
+                                        },
+                                        {
+                                            "mode": "edit",
+                                            "name": "fldl2EXGbyDDmcRy4",
+                                            "type": "select",
+                                            "label": "Phase",
+                                            "dynamic": true,
+                                            "options": [
+                                                {
+                                                    "label": "Phase 1",
+                                                    "value": "Phase 1"
+                                                },
+                                                {
+                                                    "label": "Phase 2",
+                                                    "value": "Phase 2"
+                                                },
+                                                {
+                                                    "label": "Phase 3",
+                                                    "value": "Phase 3"
+                                                },
+                                                {
+                                                    "label": "Phase 4",
+                                                    "value": "Phase 4"
+                                                },
+                                                {
+                                                    "label": "No Pricing Plan",
+                                                    "value": "No Pricing Plan"
+                                                }
+                                            ],
+                                            "validate": false
+                                        },
+                                        {
+                                            "name": "fldLPoExgDWeTauMK",
+                                            "type": "number",
+                                            "label": "Current Listing Rate"
+                                        },
+                                        {
+                                            "mode": "edit",
+                                            "name": "fldeHLhyzW5yIlFuN",
+                                            "type": "select",
+                                            "label": "PM",
+                                            "dynamic": true,
+                                            "options": [
+                                                {
+                                                    "label": "Harris",
+                                                    "value": "Harris"
+                                                },
+                                                {
+                                                    "label": "Jeff Stoddard",
+                                                    "value": "Jeff Stoddard"
+                                                },
+                                                {
+                                                    "label": "TestPM",
+                                                    "value": "TestPM"
+                                                },
+                                                {
+                                                    "label": "Dante Woodson",
+                                                    "value": "Dante Woodson"
+                                                },
+                                                {
+                                                    "label": "Philip Holbrook",
+                                                    "value": "Philip Holbrook"
+                                                },
+                                                {
+                                                    "label": "Steven Braden",
+                                                    "value": "Steven Braden"
+                                                }
+                                            ],
+                                            "validate": false
+                                        },
+                                        {
+                                            "name": "fldxXL2g6bankrsYV",
+                                            "time": false,
+                                            "type": "date",
+                                            "label": "Date Deactivated"
+                                        },
+                                        {
+                                            "name": "fldEXPfUsdJpb5G8k",
+                                            "type": "text",
+                                            "label": "Rate Change History",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fld1mnjEh4y2ryKpb",
+                                            "type": "number",
+                                            "label": "# of Price Adjustments"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Record"
+                                }
+                            ]
+                        },
+                        "record": {
+                            "nested": {
+                                "fldCqtkGDLc9UL5sY": {
+                                    "mode": "chose"
+                                },
+                                "fldQBEG0ELsdEyrB0": {
+                                    "mode": "chose"
+                                },
+                                "fldeHLhyzW5yIlFuN": {
+                                    "mode": "edit"
+                                },
+                                "fldegIzLAmXZwwxHc": {
+                                    "mode": "chose"
+                                },
+                                "fldl2EXGbyDDmcRy4": {
+                                    "mode": "chose",
+                                    "label": "Empty"
+                                },
+                                "fldlYU2nDvqXbDYKE": {
+                                    "mode": "chose"
+                                },
+                                "fldn07XzgdD4F1fYJ": {
+                                    "mode": "chose",
+                                    "label": "Empty"
+                                }
+                            }
+                        },
+                        "typecast": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable2"
+                            },
+                            "label": "My Airtable Token or Key connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "typecast",
+                        "type": "boolean",
+                        "label": "Smart links",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "record",
+                        "spec": [
+                            {
+                                "name": "fld400rRq6ca3Cg92",
+                                "type": "text",
+                                "label": "Unit Name"
+                            },
+                            {
+                                "name": "fldopI71CcmKG8FgJ",
+                                "time": false,
+                                "type": "date",
+                                "label": "Activate By"
+                            },
+                            {
+                                "name": "fld3a02CroWq43UQ5",
+                                "type": "number",
+                                "label": "Max Rate"
+                            },
+                            {
+                                "name": "fldYz7grMKRPmK8yT",
+                                "type": "number",
+                                "label": "Min Rate"
+                            },
+                            {
+                                "name": "fldlYU2nDvqXbDYKE",
+                                "type": "boolean",
+                                "label": "Description Ready"
+                            },
+                            {
+                                "name": "fldCqtkGDLc9UL5sY",
+                                "spec": {
+                                    "mode": "edit",
+                                    "name": "value",
+                                    "type": "select",
+                                    "label": "Value",
+                                    "dynamic": true,
+                                    "options": [
+                                        {
+                                            "label": "Ready for Activation",
+                                            "value": "Ready for Activation"
+                                        },
+                                        {
+                                            "label": "Missing Photos",
+                                            "value": "Missing Photos"
+                                        },
+                                        {
+                                            "label": "Missing Tour",
+                                            "value": "Missing Tour"
+                                        },
+                                        {
+                                            "label": "Review",
+                                            "value": "Review"
+                                        },
+                                        {
+                                            "label": "Photos Are of Similar Unit",
+                                            "value": "Photos Are of Similar Unit"
+                                        }
+                                    ],
+                                    "validate": false
+                                },
+                                "type": "array",
+                                "label": "Media Status"
+                            },
+                            {
+                                "name": "fldQBEG0ELsdEyrB0",
+                                "spec": {
+                                    "mode": "edit",
+                                    "name": "value",
+                                    "type": "select",
+                                    "label": "Value",
+                                    "dynamic": true,
+                                    "options": [
+                                        {
+                                            "label": "Add 3D Tour",
+                                            "value": "Add 3D Tour"
+                                        },
+                                        {
+                                            "label": "Add Drone",
+                                            "value": "Add Drone"
+                                        },
+                                        {
+                                            "label": "Needs Photos to Market",
+                                            "value": "Needs Photos to Market"
+                                        },
+                                        {
+                                            "label": "None",
+                                            "value": "None"
+                                        },
+                                        {
+                                            "label": "Photos Next Turn",
+                                            "value": "Photos Next Turn"
+                                        },
+                                        {
+                                            "label": "Photos to Edit on Drive",
+                                            "value": "Photos to Edit on Drive"
+                                        }
+                                    ],
+                                    "validate": false
+                                },
+                                "type": "array",
+                                "label": "Media Action"
+                            },
+                            {
+                                "name": "fldegIzLAmXZwwxHc",
+                                "type": "boolean",
+                                "label": "Ready for Market"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldn07XzgdD4F1fYJ",
+                                "type": "select",
+                                "label": "Activation Status"
+                            },
+                            {
+                                "name": "fldLfmLSzxzVMS6ht",
+                                "time": false,
+                                "type": "date",
+                                "label": "Lease Expires"
+                            },
+                            {
+                                "name": "fldvAtOMpBAJhhiG5",
+                                "time": false,
+                                "type": "date",
+                                "label": "Availability Date"
+                            },
+                            {
+                                "name": "fldd5h4V6qakWWHVv",
+                                "time": false,
+                                "type": "date",
+                                "label": "Date Activated"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldl2EXGbyDDmcRy4",
+                                "type": "select",
+                                "label": "Phase"
+                            },
+                            {
+                                "name": "fldLPoExgDWeTauMK",
+                                "type": "number",
+                                "label": "Current Listing Rate"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldeHLhyzW5yIlFuN",
+                                "type": "select",
+                                "label": "PM"
+                            },
+                            {
+                                "name": "fldxXL2g6bankrsYV",
+                                "time": false,
+                                "type": "date",
+                                "label": "Date Deactivated"
+                            },
+                            {
+                                "name": "fldEXPfUsdJpb5G8k",
+                                "type": "text",
+                                "label": "Rate Change History"
+                            },
+                            {
+                                "name": "fld1mnjEh4y2ryKpb",
+                                "type": "number",
+                                "label": "# of Price Adjustments"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "Unit Name",
+                        "type": "text",
+                        "label": "Unit Name"
+                    },
+                    {
+                        "name": "Activate By",
+                        "time": false,
+                        "type": "date",
+                        "label": "Activate By"
+                    },
+                    {
+                        "name": "Max Rate",
+                        "type": "number",
+                        "label": "Max Rate"
+                    },
+                    {
+                        "name": "Min Rate",
+                        "type": "number",
+                        "label": "Min Rate"
+                    },
+                    {
+                        "name": "Description Ready",
+                        "type": "boolean",
+                        "label": "Description Ready"
+                    },
+                    {
+                        "name": "Media Status",
+                        "type": "array",
+                        "label": "Media Status",
+                        "dynamic": true,
+                        "editable": true
+                    },
+                    {
+                        "name": "Media Action",
+                        "type": "array",
+                        "label": "Media Action",
+                        "dynamic": true,
+                        "editable": true
+                    },
+                    {
+                        "name": "Ready for Market",
+                        "type": "boolean",
+                        "label": "Ready for Market"
+                    },
+                    {
+                        "name": "Activation Status",
+                        "type": "text",
+                        "label": "Activation Status"
+                    },
+                    {
+                        "name": "Lease Expires",
+                        "time": false,
+                        "type": "date",
+                        "label": "Lease Expires"
+                    },
+                    {
+                        "name": "Availability Date",
+                        "time": false,
+                        "type": "date",
+                        "label": "Availability Date"
+                    },
+                    {
+                        "name": "Date Activated",
+                        "time": false,
+                        "type": "date",
+                        "label": "Date Activated"
+                    },
+                    {
+                        "name": "Next Price Drop Date",
+                        "type": "text",
+                        "label": "Next Price Drop Date"
+                    },
+                    {
+                        "name": "Price Drop Interval",
+                        "type": "text",
+                        "label": "Price Drop Interval"
+                    },
+                    {
+                        "name": "Suggested Price Drop",
+                        "type": "text",
+                        "label": "Suggested Price Drop"
+                    },
+                    {
+                        "name": "Phase",
+                        "type": "text",
+                        "label": "Phase"
+                    },
+                    {
+                        "name": "Current Listing Rate",
+                        "type": "number",
+                        "label": "Current Listing Rate"
+                    },
+                    {
+                        "name": "PM",
+                        "type": "text",
+                        "label": "PM"
+                    },
+                    {
+                        "name": "Date Deactivated",
+                        "time": false,
+                        "type": "date",
+                        "label": "Date Deactivated"
+                    },
+                    {
+                        "name": "Rate Change History",
+                        "type": "text",
+                        "label": "Rate Change History",
+                        "multiline": true
+                    },
+                    {
+                        "name": "# of Price Adjustments",
+                        "type": "number",
+                        "label": "# of Price Adjustments"
+                    },
+                    {
+                        "name": "Days on Market",
+                        "type": "text",
+                        "label": "Days on Market"
+                    },
+                    {
+                        "name": "Price Drop Notification Trigger",
+                        "type": "text",
+                        "label": "Price Drop Notification Trigger"
+                    },
+                    {
+                        "name": "Activate By Notification Trigger",
+                        "type": "text",
+                        "label": "Activate By Notification Trigger"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
