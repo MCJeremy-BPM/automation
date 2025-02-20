@@ -1,0 +1,81 @@
+// Select your table
+let table = base.getTable("Activation & Pricing Workflow");
+
+// Get the record ID from the automation trigger
+let inputConfig = input.config();
+let recordId = inputConfig.RecordID;
+
+// Validate that the record ID exists
+if (!recordId) {
+    console.error("No record ID provided. Please check your automation setup.");
+    return;
+}
+
+// Fetch the specific record
+let record = await table.selectRecordAsync(recordId);
+
+if (!record) {
+    console.error(`Record with ID ${recordId} not found.`);
+    return;
+}
+
+// Define fields
+let startDateField = "Lease Expires"; // Start date field
+let resultDateField = "Availability Date"; // Field to update with the calculated date
+
+// Define a static list of holiday dates (MM/DD/YYYY format converted to Date objects)
+let holidayDates = [
+    "01/01/2025",
+    "05/26/2025",
+    "07/04/2025",
+    "09/01/2025",
+    "11/27/2025",
+    "11/28/2025",
+    "12/24/2025",
+    "12/25/2025",
+    "12/31/2025",
+].map(dateStr => new Date(dateStr));
+
+// Function to calculate 7 business days while skipping holidays
+function addBusinessDays(startDate, daysToAdd, holidays) {
+    let currentDate = new Date(startDate);
+    let addedDays = 0;
+
+    while (addedDays < daysToAdd) {
+        currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+        let dayOfWeek = currentDate.getDay();
+
+        // Skip weekends
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+            continue;
+        }
+
+        // Skip holidays
+        if (holidays.some(holiday => holiday.toDateString() === currentDate.toDateString())) {
+            continue;
+        }
+
+        addedDays++;
+    }
+
+    return currentDate;
+}
+
+// Get the start date from the record
+let startDate = record.getCellValue(startDateField);
+
+// Ensure the start date exists
+if (!startDate) {
+    console.error("No start date found for this record. Skipping update...");
+    return;
+}
+
+// Calculate the new date
+let newDate = addBusinessDays(startDate, 8, holidayDates);
+
+// Update the record with the calculated date
+await table.updateRecordAsync(record.id, {
+    [resultDateField]: newDate.toISOString().split("T")[0], // Save as YYYY-MM-DD format
+});
+
+console.log(`Updated Availability Date for record ${recordId} to ${newDate.toISOString().split("T")[0]}`);
