@@ -1,0 +1,184 @@
+// **1. Configuration (REPLACE THESE WITH YOUR ACTUAL VALUES)**
+const GOOGLE_MAPS_API_KEY = 'AIzaSyB5tdjZrvdwxoGs0OhoqCF_4C53FqFsQEM';
+const ADDRESS_FIELD_NAME = 'Address';
+const NEIGHBORHOOD_FIELD_NAME = 'Neighborhood';
+const BASE_NAME = 'BPM CRM';
+const TABLE_NAME = 'Geo Data';
+const GITHUB_GEOJSON_URL = 'https://raw.githubusercontent.com/MCJeremy-BPM/gis/refs/heads/main/planning_area_11_02_2023%20(3).json';
+const STREET_FIELD_NAME = 'Street Address';
+const PARCEL_ID_FIELD_NAME = 'ParcelID'; // Changed field from GPIN to ParcelID
+const SUBDIVISION_FIELD_NAME = 'Subdivision';
+
+const GIS_PARCEL_DATA_URL = 'https://raw.githubusercontent.com/MCJeremy-BPM/gis/refs/heads/main/GISParcelData-Albemarle.json';
+const GIS_ADDITIONAL_PARCEL_DATA_URL = 'https://raw.githubusercontent.com/MCJeremy-BPM/gis/refs/heads/main/GISAdditionalParcelData-Albemarle.json';
+
+let table = base.getTable(TABLE_NAME);
+let query = await table.selectRecordsAsync();
+let geoJsonUrl = GITHUB_GEOJSON_URL;
+
+// Function to get coordinates and street address from Google Maps API
+async function getCoordinatesAndStreet(address) {
+    let geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GOOGLE_MAPS_API_KEY}`;
+    let response = await fetch(geocodeUrl);
+    let data = await response.json();
+
+    if (data.status === "OK") {
+        let location = data.results[0].geometry.location;
+        let streetAddress = data.results[0].formatted_address; // Retrieve street address
+        return {
+            lat: location.lat,
+            lon: location.lng,
+            street: streetAddress,
+        };
+    } else {
+        console.log(`Error geocoding address: ${address}`);
+        return null;
+    }
+}
+
+// Function to check if a point is inside a polygon
+function isPointInPolygon(point, polygon) {
+    let x = point.lon, y = point.lat;
+    let inside = false;
+
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        let xi = polygon[i][0], yi = polygon[i][1];
+        let xj = polygon[j][0], yj = polygon[j][1];
+
+        let intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+    }
+    return inside;
+}
+
+// Function to fetch JSON data from a URL
+async function fetchJsonData(fileUrl) {
+    let response = await fetch(fileUrl);
+    let data = await response.json();
+    return data;
+}
+
+// Improved normalization function (case-insensitive, handles whitespace)
+async function normalizeStreetAddress(fullAddress) {
+    let match = fullAddress.match(/^\d+\s[\w\s]+/);
+    if (match) {
+        let normalized = match[0].trim().toLowerCase(); // Trim whitespace and lowercase
+        console.log(`Normalized address: ${normalized} from full address: ${fullAddress}`);
+        return normalized;
+    }
+    console.log(`Could not normalize address: ${fullAddress}`);
+    return fullAddress.trim().toLowerCase(); // Fallback: trim and lowercase full address
+}
+
+// Improved search function (case-insensitive comparison, with console logs)
+async function searchParcelData(streetAddress, parcelData) {
+    let normalizedSearchAddress = streetAddress.toLowerCase(); // Normalize the search term
+
+    let result = parcelData.find(row => {
+        let normalizedPropStreet = row['PropStreet'] ? row['PropStreet'].toLowerCase().trim() : "";
+        let match = normalizedPropStreet === normalizedSearchAddress; // Store the comparison result
+
+        if (match) {  // Log ONLY if there's a match
+            console.log(`MATCH FOUND: "${normalizedSearchAddress}" with "${normalizedPropStreet}" - ParcelID: ${row['ParcelID']}`);
+        } //No log for no match
+
+        return match; // Return the comparison result (true or false)
+    });
+
+    return result ? result['ParcelID'] : null;
+}
+
+// Function to search for additional details using ParcelID
+async function searchAdditionalParcelData(parcelID, additionalData) {
+    let result = additionalData.find(row => row['ParcelID'] === parcelID);
+    if (result) {
+        return {
+            compPlanArea: result['CompPlanArea'] || null,
+            subdivision: result['Subdivision'] || null,
+        };
+    }
+    return null;
+}
+
+// Main function
+async function main() {
+    let geoJsonResponse = await fetch(geoJsonUrl);
+    let geoJsonData = await geoJsonResponse.json();
+
+    // Fetch both JSON files
+    let parcelData = await fetchJsonData(GIS_PARCEL_DATA_URL);
+    let additionalData = await fetchJsonData(GIS_ADDITIONAL_PARCEL_DATA_URL);
+
+    for (let record of query.records) {
+        let address = record.getCellValue(ADDRESS_FIELD_NAME);
+
+        if (address) {
+            let coordinatesAndStreet = await getCoordinatesAndStreet(address);
+
+            if (coordinatesAndStreet) {
+                let { lat, lon, street } = coordinatesAndStreet;
+                let point = { lon, lat };
+                let neighborhood = "Unknown";
+
+                // Check GeoJSON for neighborhood
+                console.log(`Checking GeoJSON for address: ${address}`);
+                let foundNeighborhood = false;
+                for (let feature of geoJsonData.features) {
+                    let polygons = feature.geometry.coordinates;
+
+                    for (let i = 0; i < polygons.length; i++) {
+                        let ring = polygons[i];
+
+                        if (i === 0 && isPointInPolygon(point, ring)) {
+                            let isHole = false;
+                            for (let j = 1; j < polygons.length; j++) {
+                                if (isPointInPolygon(point, polygons[j])) {
+                                    isHole = true;
+                                    break;
+                                }
+                            }
+                            if (!isHole) {
+                                neighborhood = feature.properties.NAME || "Unknown";
+                                foundNeighborhood = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (foundNeighborhood) break;
+                }
+
+                // If GeoJSON doesn't find a neighborhood, search JSON files
+                let parcelID = null;
+                let subdivision = null;
+                if (neighborhood === "Unknown") {
+                    let normalizedStreet = await normalizeStreetAddress(street);
+                    console.log(`Searching parcel data for normalized street: ${normalizedStreet}`);
+                    parcelID = await searchParcelData(normalizedStreet, parcelData); // Call the improved search function
+
+                    if (parcelID) {
+                        let details = await searchAdditionalParcelData(parcelID, additionalData);
+                        if (details) {
+                            neighborhood = details.compPlanArea; // CompPlanArea goes into "Neighborhood"
+                            subdivision = details.subdivision;
+                        }
+                    }
+                }
+
+                // Log final values before updating Airtable
+                console.log(`Updating record with Street: ${street}, Neighborhood: ${neighborhood}, ParcelID: ${parcelID}, Subdivision: ${subdivision}`);
+
+                // Update Airtable record
+                await table.updateRecordAsync(record.id, {
+                    [STREET_FIELD_NAME]: street,
+                    [NEIGHBORHOOD_FIELD_NAME]: neighborhood,
+                    Latitude: lat,
+                    Longitude: lon,
+                    [PARCEL_ID_FIELD_NAME]: parcelID,
+                    [SUBDIVISION_FIELD_NAME]: subdivision,
+                });
+            }
+        }
+    }
+}
+
+await main();
